@@ -3,3 +3,4 @@ lucille.cfg
 lucille.log
 output.log
 python-hipchat/
+.DS_Store
