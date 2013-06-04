@@ -15,16 +15,17 @@ hipchat.config.init_cfg('hipchat.cfg')
 lucille_cfg_file = open('lucille.cfg')
 lucille_cfg = json.load(lucille_cfg_file)
 giphy_api_key = lucille_cfg.get("giphy_api_key",None)
-hipchat_room = lucille_cfg.get("hipchat_room", None)
+hipchat_room_name = lucille_cfg.get("hipchat_room", None)
 
 if giphy_api_key == None:
   print "missing giphy_api_key in cfg"
   exit()
 
-if hipchat_room == None:
+if hipchat_room_name == None:
   print "missing hipchat_room in cfg"
   exit()
 
+my_username = "lucille"
 
 raw_hipchat_log=open('lucille.log')
 try:
@@ -34,13 +35,13 @@ except Exception:
 #print(url_log)
 raw_hipchat_log.close()
 
-digg_room = None
+hipchat_room = None
 for r in Room.list():
-  if r.name == "digg": #digg
-    digg_room = r
+  if r.name == hipchat_room_name:
+    hipchat_room = r
     break
 
-if digg_room == None:
+if hipchat_room == None:
   print "no room found for digg"
   exit()
 
@@ -54,7 +55,7 @@ while True:
   most_recent_message_date = None
 
   try:
-    recent_messages = Room.history(room_id=digg_room.room_id, date="recent")
+    recent_messages = Room.history(room_id=hipchat_room.room_id, date="recent")
   except Exception, e:
     print e
     time.sleep(20)
@@ -64,8 +65,7 @@ while True:
     user = getattr(m, 'from')
     user_name = user.get('name')
     user_id = user.get('user_id',None)
-    if user_id == "api" or user_name == "lucille":
-      # print "user is api or lucille!"
+    if user_id == "api" or user_name == my_username:
       continue
 
     try:
@@ -73,12 +73,9 @@ while True:
       message_date_string = getattr(m, 'date')
       message_date = parser.parse(message_date_string)
       message_time = time.mktime(message_date.timetuple())
-      # print time.mktime(message_date.timetuple())
       if message_time > last_message_time and message:
         term = GIPHY_REGEX.findall(message)
         if term:
-          # print message_date
-          # print last_message_time
           if most_recent_message_date:
             if most_recent_message_date > message_date:
               most_recent_message_date = message_date
@@ -90,14 +87,10 @@ while True:
       print e
       pass
 
-  # print terms
-  # print "most_recent_message_date = %s" % most_recent_message_date
   if most_recent_message_date:
     most_recent_message_time = time.mktime(most_recent_message_date.timetuple())
     hipchat_log["last_message_time"] = most_recent_message_time
-  # print hipchat_log
-  # exit()
-
+  
   gif_urls = []
   no_results = []
 
@@ -113,7 +106,6 @@ while True:
     data = gif_list.get("data")
     count = len(data)
     if count == 0:
-      # print "no results for %s" % encoded_t
       no_results.append(t)
       continue
     random_index = random.randrange(count)
@@ -126,18 +118,17 @@ while True:
         if original_image_url:
           gif_urls.append(original_image_url)
 
-  # print gif_urls
 
   for url in gif_urls:
     print url
     # message_text = "%s: %s" % ()
-    message = {'room_id': digg_room.room_id, 'from': 'lucille', 'message': url, 'message_format' : 'text', 'color' : 'green'}
+    message = {'room_id': hipchat_room.room_id, 'from': my_username, 'message': url, 'message_format' : 'text', 'color' : 'green'}
     Room.message(**message)
 
   if len(no_results):
     no_results_string = ", ".join(no_results)
     message_text = "No results for: %s" % no_results_string
-    message = {'room_id': digg_room.room_id, 'from': 'lucille', 'message': message_text, 'message_format' : 'text', 'color': 'gray'}
+    message = {'room_id': hipchat_room.room_id, 'from': my_username, 'message': message_text, 'message_format' : 'text', 'color': 'gray'}
     Room.message(**message)
 
 
