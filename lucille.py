@@ -32,7 +32,6 @@ try:
   hipchat_log = json.load(raw_hipchat_log)
 except Exception:
   hipchat_log = {};
-#print(url_log)
 raw_hipchat_log.close()
 
 hipchat_room = None
@@ -100,8 +99,6 @@ while True:
     url = "http://api.giphy.com/v1/gifs/search?q=%s&api_key=%s" % (encoded_t,giphy_api_key)
     h = Http()
     resp, content = h.request(url, "GET")
-    # print resp
-    # print content
     gif_list = json.loads(content)
     data = gif_list.get("data")
     count = len(data)
