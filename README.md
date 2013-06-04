@@ -7,13 +7,11 @@ Once running, any time someone types "/giphy " then a search term into Hipchat, 
 
 ## Get Started
 
-Rename lucille_sample.cfg to lucille.cfg & enter in your Giphy API key & Hipchat room.
+- Rename lucille_sample.cfg to lucille.cfg & enter in your Hipchat room name.
+- Rename hipchat_sample.cfg to hipchat.cfg & enter in your Hipchat API token.
+	- To get a Hipchat token, go to https://www.hipchat.com/admin/api & get an 'admin' token.
 
-https://github.com/Giphy/GiphyAPI
-
-Rename hipchat_sample.cfg to hipchat.cfg & enter in your Hipchat API token.
-
-To get a Hipchat token, go to https://www.hipchat.com/admin/api & get an 'admin' token.
+More on Giphy: https://github.com/Giphy/GiphyAPI
 
 
 ## Requirements
