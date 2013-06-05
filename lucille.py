@@ -30,9 +30,9 @@ my_username = "lucille"
 try:
   raw_hipchat_log=open('lucille.log')
   hipchat_log = json.load(raw_hipchat_log)
+  raw_hipchat_log.close()
 except Exception:
   hipchat_log = {};
-raw_hipchat_log.close()
 
 hipchat_room = None
 for r in Room.list():
