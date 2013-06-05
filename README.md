@@ -13,6 +13,7 @@ Once running, any time someone types "/giphy " then a search term into Hipchat, 
 
 More on Giphy: https://github.com/Giphy/GiphyAPI
 
+If you end up using it, let me know! I'm [@tolar](http://twitter.com/tolar) on twitter.
 
 ## Requirements
 Python Hipchat library
