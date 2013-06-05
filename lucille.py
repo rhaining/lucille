@@ -27,8 +27,8 @@ if hipchat_room_name == None:
 
 my_username = "lucille"
 
-raw_hipchat_log=open('lucille.log')
 try:
+  raw_hipchat_log=open('lucille.log')
   hipchat_log = json.load(raw_hipchat_log)
 except Exception:
   hipchat_log = {};
