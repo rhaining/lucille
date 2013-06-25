@@ -101,9 +101,12 @@ while True:
     resp, content = h.request(url, "GET")
     gif_list = json.loads(content)
     data = gif_list.get("data")
-    count = len(data)
-    if count == 0:
-      no_results.append(t)
+    if data:
+      count = len(data)
+      if count == 0:
+        no_results.append(t)
+        continue
+    else:
       continue
     random_index = random.randrange(count)
     gif_dict = data[random_index]
@@ -120,7 +123,8 @@ while True:
     print url
     # message_text = "%s: %s" % ()
     message = {'room_id': hipchat_room.room_id, 'from': my_username, 'message': url, 'message_format' : 'text', 'color' : 'green'}
-    Room.message(**message)
+    retval = Room.message(**message)
+    print retval
 
   if len(no_results):
     no_results_string = ", ".join(no_results)
