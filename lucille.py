@@ -107,6 +107,7 @@ while True:
         no_results.append(t)
         continue
     else:
+      no_results.append(t)
       continue
     random_index = random.randrange(count)
     gif_dict = data[random_index]
