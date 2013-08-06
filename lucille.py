@@ -114,10 +114,12 @@ while True:
       no_results.append(t)
       continue
 
-    count = len(data)
-    if count == 0:
-      #print url
-      #print content
+    if data:
+      count = len(data)
+      if count == 0:
+        no_results.append(t)
+        continue
+    else:
       no_results.append(t)
       continue
     random_index = random.randrange(count)
@@ -135,7 +137,8 @@ while True:
     print url
     # message_text = "%s: %s" % ()
     message = {'room_id': hipchat_room.room_id, 'from': my_username, 'message': url, 'message_format' : 'text', 'color' : 'green'}
-    Room.message(**message)
+    retval = Room.message(**message)
+    print retval
 
   if len(no_results):
     no_results_string = ", ".join(no_results)
