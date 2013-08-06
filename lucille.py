@@ -92,6 +92,7 @@ while True:
   
   gif_urls = []
   no_results = []
+  errors = []
 
   for t in terms:
     encoded_t = urllib.quote_plus(t)
@@ -100,9 +101,23 @@ while True:
     h = Http()
     resp, content = h.request(url, "GET")
     gif_list = json.loads(content)
-    data = gif_list.get("data")
+    data = gif_list.get("data", None)
+    if data == None:
+      #print url
+      #print content
+      data = gif_list.get("meta",None)
+      if data != None:
+        error_message = data.get("error_message",None)
+        if error_message != None:
+          errors.append("%s: %s" % (error_message, t))
+          continue
+      no_results.append(t)
+      continue
+
     count = len(data)
     if count == 0:
+      #print url
+      #print content
       no_results.append(t)
       continue
     random_index = random.randrange(count)
@@ -127,6 +142,13 @@ while True:
     message_text = "No results for: %s" % no_results_string
     message = {'room_id': hipchat_room.room_id, 'from': my_username, 'message': message_text, 'message_format' : 'text', 'color': 'gray'}
     Room.message(**message)
+
+  if len(errors):
+    errors_string = "\n".join(errors)
+    message_text = errors_string
+    message = {'room_id': hipchat_room.room_id, 'from': my_username, 'message': message_text, 'message_format' : 'text', 'color': 'gray'}
+    Room.message(**message)
+    
 
 
   with open('lucille.log', 'w') as outfile:
