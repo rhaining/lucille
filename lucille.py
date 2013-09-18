@@ -121,8 +121,8 @@ while True:
       try:
         gif_list = json.loads(content)
       except ValueError, e:
-        print e
-        print content
+        print "error: %s" % e
+        print "content: %s" % content
         continue
       data = gif_list.get("data", None)
       if data == None:
