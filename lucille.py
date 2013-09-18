@@ -172,5 +172,5 @@ while True:
   with open('lucille.log', 'w') as outfile:
     json.dump(hipchat_log, outfile)
 
-  time.sleep(5)
+  time.sleep(10)
 
