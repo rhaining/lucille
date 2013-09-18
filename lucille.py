@@ -51,18 +51,19 @@ GIPHY_REGEX = re.compile("\/giphy (.+)")
 
 # http://help.hipchat.com/knowledgebase/articles/64359-running-a-hipchat-bot
 while True:
-  _deprecated_last_message_time = hipchat_log.get("last_message_time",0)
-  if _deprecated_last_message_time > 0:
-    hipchat_log.pop("last_message_time",None)
   last_message_times = hipchat_log.get("last_message_times",None)
+  if last_message_times == None:
+    _deprecated_last_message_time = hipchat_log.get("last_message_time",0)
+    if _deprecated_last_message_time > 0:
+      hipchat_log.pop("last_message_time",None)
+      last_message_times = {}
+      for hipchat_room in hipchat_rooms:
+        last_message_times[hipchat_room.name] = _deprecated_last_message_time
+        hipchat_log["last_message_times"] = last_message_times
 
   for hipchat_room in hipchat_rooms:
     terms = []
-    last_message_time = 0
-    if last_message_times:
-      last_message_time = last_message_times.get(hipchat_room.name, 0)
-    elif _deprecated_last_message_time > 0:
-      last_message_time = _deprecated_last_message_time
+    last_message_time = last_message_times.get(hipchat_room.name, 0)
 
     most_recent_message_date = None
 
@@ -168,8 +169,6 @@ while True:
       message = {'room_id': hipchat_room.room_id, 'from': my_username, 'message': message_text, 'message_format' : 'text', 'color': 'gray'}
       Room.message(**message)
     
-
-
   with open('lucille.log', 'w') as outfile:
     json.dump(hipchat_log, outfile)
 
