@@ -117,7 +117,13 @@ while True:
       print url
       h = Http()
       resp, content = h.request(url, "GET")
-      gif_list = json.loads(content)
+      gif_list = None
+      try:
+        gif_list = json.loads(content)
+      except ValueError, e:
+        print e
+        print content
+        continue
       data = gif_list.get("data", None)
       if data == None:
         #print url
