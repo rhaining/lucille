@@ -197,6 +197,7 @@ while True:
               if random.random() < 0.05: #5% of the time
                 #EASTEREGG occasionally swap out image with dave winer gif
                 original_image_url = 'http://f.cl.ly/items/2B2O014311012c1W3O0f/winer.gif'
+                eightball_response_message = "Dave Winer says " + eightball_response_message
 
               eightball_responses.append((eightball_response_message, original_image_url))
             else:
