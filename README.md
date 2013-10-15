@@ -25,7 +25,7 @@ Python modules:
 
 ## Ports
 - [Buster](https://github.com/poptip/buster), written in Golang by [Andrew Bonventre](https://github.com/andybons) from [Poptip](http://poptip.com).
-
+- [Gob](https://github.com/wdaher/gob/), for Zulip, written in Python by [Waseem Daher](https://github.com/wdaher).
 
 ## License Info
 
