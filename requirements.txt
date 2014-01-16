@@ -1,0 +1,4 @@
+configobj==4.7.2
+hipchat==0.0.1
+httplib2==0.8
+python-dateutil==2.2
