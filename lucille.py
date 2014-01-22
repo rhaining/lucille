@@ -80,7 +80,10 @@ EIGHTBALL_RESPONSE_TO_KEYWORDS = {
 
 # http://help.hipchat.com/knowledgebase/articles/64359-running-a-hipchat-bot
 while True:
-  last_message_times = hipchat_log.get("last_message_times",None)
+  if hipchat_log == {}:
+    last_message_times = None
+  else:
+    last_message_times = hipchat_log.get("last_message_times",None)
   if last_message_times == None:
     _deprecated_last_message_time = hipchat_log.get("last_message_time",0)
     if _deprecated_last_message_time > 0:
@@ -92,7 +95,10 @@ while True:
 
   for hipchat_room in hipchat_rooms:
     terms = []
-    last_message_time = last_message_times.get(hipchat_room.name, 0)
+    if last_message_times == None:
+      last_message_time = 0
+    else:
+      last_message_time = last_message_times.get(hipchat_room.name, 0)
 
     most_recent_message_date = None
 
