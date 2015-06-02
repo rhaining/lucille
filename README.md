@@ -4,6 +4,10 @@ A Giphy Hipchat bot.
 
 Once running, any time someone types "/giphy " then a search term into Hipchat, Lucille will return a random gif matching that term.
 
+## Note
+
+I'm not currently working on this project. I'm happy to review/accept pull requests though.
+
 
 ## Get Started
 
@@ -38,4 +42,4 @@ http://www.apache.org/licenses/LICENSE-2.0
 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 
 ## Lucille
-<a href="http://gph.is/XIBJ2k"><img src="http://media3.giphy.com/media/dEras2eeWXfKo/original.gif"/></a>
+<a href="http://gph.is/XIa1D3"><img src="http://i.giphy.com/BCOZjy2WLe8FO.gif"/></a>
