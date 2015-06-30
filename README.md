@@ -14,6 +14,7 @@ I'm not currently working on this project. I'm happy to review/accept pull reque
 - Rename lucille_sample.cfg to lucille.cfg & enter in your Hipchat room name.
 - Rename hipchat_sample.cfg to hipchat.cfg & enter in your Hipchat API token.
 	- To get a Hipchat token, go to https://www.hipchat.com/admin/api & get an 'admin' token.
+- Run `python lucille.py`
 
 More on Giphy: https://github.com/Giphy/GiphyAPI
 
@@ -30,6 +31,9 @@ Python modules:
 ## Ports
 - [Buster](https://github.com/poptip/buster), written in Golang by [Andrew Bonventre](https://github.com/andybons) from [Poptip](http://poptip.com).
 - [Gob](https://github.com/wdaher/gob/), for Zulip, written in Python by [Waseem Daher](https://github.com/wdaher).
+
+Have you ported Lucille to another language? Let me know & I'll list it here!
+
 
 ## License Info
 
